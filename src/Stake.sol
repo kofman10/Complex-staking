@@ -7,7 +7,7 @@ import { Kofman10WETH } from "./Kofman10WETH.sol";
 import { Kofman10} from "./Kofman10.sol";
 
 
-contract Counter is ReentrancyGuard {
+contract Stake is ReentrancyGuard {
 
     Kofman10WETH private immutable i_kfmw;
     Kofman10 private immutable i_kfm;
@@ -142,34 +142,7 @@ function withdraw() external {
     }
 }
 
-    
-    // // Function to withdraw ETH and rewards
-    // function withdraw() external {
-    //     uint256 userBalance = userStakedBalance[msg.sender];
-    //     uint256 userRTokenBalance = userRTokens[msg.sender];
-        
-    //     require(userBalance > 0, "No balance to withdraw");
-        
-    //     // Calculate and send rewards
-    //     uint256 rewards = calculateRewards(msg.sender);
-    //     if (rewards > 0) {
-    //         userRTokens[msg.sender] += rewards;
-    //         emit Rewarded(msg.sender, rewards);
-    //     }
-        
-    //     // Reset the compounding timestamp
-    //     lastCompoundingTimestamp[msg.sender] = block.timestamp;
-        
-    //     // Reset the user's balance and rTokens
-    //     userStakedBalance[msg.sender] = 0;
-    //     userRTokens[msg.sender] = 0;
-        
-    //     // Convert WETH back to ETH and send it to the user
-    //     IWrapper(wethAddress).withdraw(userBalance);
-    //     payable(msg.sender).transfer(userBalance);
-        
-    //     emit Withdrawn(msg.sender, userBalance);
-    // }
+ 
     
     // Function to calculate rewards based on the annual rate
     function calculateRewards(address user) internal view returns (uint256) {
