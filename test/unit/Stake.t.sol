@@ -7,6 +7,8 @@ import {Kofman10WETH} from "../../script/Kofman10WETH.s.sol";
 import {Kofman10} from "../../script/Kofman10.s.sol";
 import {Kofman10} from "../../src/Kofman10.sol";
 import {Kofman10WETH} from "../../src/Kofman10WETH.sol";
+import {ERC20Mock} from "@openzeppelin/contracts/mocks/ERC20Mock.sol";
+import {IWrapper} from "../../src/IWrapper.sol";
 import {Stake} from "../../src/Stake.sol";
 
 contract StakeTest is Test {
@@ -30,8 +32,8 @@ contract StakeTest is Test {
         address user = address(this);
 
         // Ensure user has enough WETH to deposit
-        weth.deposit{value: depositAmount}();
-        weth.transfer(address(stk), depositAmount);
+        IWrapper(weth).deposit{value: depositAmount}();
+        ERC20Mock(weth).transfer(address(stk), depositAmount);
 
         // Stake ETH
         stk.stakeETH{value: depositAmount}();
@@ -52,8 +54,8 @@ contract StakeTest is Test {
         address user = address(this);
 
         // Ensure user has enough WETH to deposit
-        weth.deposit{value: depositAmount}();
-        weth.transfer(address(stk), depositAmount);
+        IWrapper(weth).deposit{value: depositAmount}();
+        ERC20Mock(weth).transfer(address(stk), depositAmount);
 
         // Stake ETH
         stk.stakeETH{value: depositAmount}();
@@ -75,8 +77,8 @@ contract StakeTest is Test {
         address user = address(this);
 
         // Ensure user has enough WETH to deposit
-        weth.deposit{value: depositAmount}();
-        weth.transfer(address(stk), depositAmount);
+        IWrapper(weth).deposit{value: depositAmount}();
+        ERC20Mock(weth).transfer(address(stk), depositAmount);
 
         // Stake ETH
         stk.stakeETH{value: depositAmount}();
@@ -101,8 +103,8 @@ contract StakeTest is Test {
         address user = address(this);
 
         // Ensure user has enough WETH to deposit
-        weth.deposit{value: depositAmount}();
-        weth.transfer(address(stk), depositAmount);
+        IWrapper(weth).deposit{value: depositAmount}();
+        ERC20Mock(weth).transfer(address(stk), depositAmount);
 
         // Stake ETH
         stk.stakeETH{value: depositAmount}();
@@ -112,7 +114,7 @@ contract StakeTest is Test {
 
         // Calculate rewards since the last compounding event
         uint256 expectedRewards = stk.calculateRewards(user);
-        uint256 actualRewards = stk.userKfmwTokens(user);
+        uint256 actualRewards = stk.userKfmTokens(user);
 
         assertEq(actualRewards, expectedRewards);
     }
