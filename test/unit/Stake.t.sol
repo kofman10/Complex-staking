@@ -21,7 +21,7 @@ contract StakeTest is Test {
         // Deploy Kofman10 token and Stake contract
       kfm = new Kofman10();
       kfmw = new Kofman10WETH();
-        stk = new Stake(address(kfm), address(kfmw), address(kfm));
+        stk = new Stake(address(kfm), address(weth), address(kfmw));
     }
 
     function testStakeETH() public {
